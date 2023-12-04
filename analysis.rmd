@@ -12,14 +12,14 @@ output: "html_document"
 # install.packages("ggplot2")
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 # load packages
 library(readr)
 library(dplyr)
 library(ggplot2)
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 # load visits and checkouts data
 wine_reviews <- read_csv('Resources/winemag-data-130k-v2.csv')
 ```
@@ -36,19 +36,38 @@ print(col_names)
 ```
 
 ```{r}
+wine_counts <- wine_reviews %>%
+  group_by(country) %>%
+  summarise(wine_count = n()) %>%
+  arrange(desc(wine_count))
+
+top_10_countries <- head(wine_counts, 10)
+```
+
+```{r}
 # bar chart that groups and counts the data by country of origin
-# bar <- ggplot(wine_reviews, aes(country)) + geom_bar(aes(fill=country)) + 
-# labs(title="Wine Reviews by Country of Origin", subtitle="Countries of origin for wines in reviews df")
-# bar
+countries_bar = ggplot(wine_counts, aes(x = reorder(country, -wine_count), y = wine_count)) + 
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = wine_count), vjust = -0.5, size = 3) +
+  ggtitle("Number of Wines by Country") +
+  xlab("Country") +
+  ylab("Number of Wines") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+countries_bar
 ```
 
 ```{r}
 # group, order, and filter the data so only the top 15 countries are shown on the chart
-# wines_by_country = wine_reviews %>%
-  # group_by(count(country)) %>%
-  # arrange(country)
+top_10_countries_bar = ggplot(top_10_countries, aes(x = reorder(country, -wine_count), y = wine_count)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = wine_count), vjust = -0.5, size = 3) +
+  ggtitle("Top 10 Countries by Number of Wines") +
+  xlab("Country") +
+  ylab("Number of Wines") + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
-# wines_by_country
+top_10_countries_bar
 ```
 
 ```{r}
