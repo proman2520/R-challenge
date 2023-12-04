@@ -6,16 +6,17 @@ output: "html_document"
 ---
 
 ```{r}
-install.packages("hms")
+# install.packages("hms")
 # install.packages("rmarkdown")
 # install.packages("readr")
+# install.packages("ggplot2")
 ```
 
 ```{r}
 # load packages
 library(readr)
 library(dplyr)
-library(ggplot)
+library(ggplot2)
 ```
 
 ```{r}
@@ -24,6 +25,49 @@ wine_reviews <- read_csv('Resources/winemag-data-130k-v2.csv')
 ```
 
 ```{r}
-# inspect dataframe
+# inspect dataframe and fix column name
 head(wine_reviews)
+print(nrow(wine_reviews))
+print(length(wine_reviews))
+wine_reviews = wine_reviews %>%
+    rename("id" = "...1")
+col_names = colnames(wine_reviews)
+print(col_names)
+```
+
+```{r}
+# bar chart that groups and counts the data by country of origin
+# bar <- ggplot(wine_reviews, aes(country)) + geom_bar(aes(fill=country)) + 
+# labs(title="Wine Reviews by Country of Origin", subtitle="Countries of origin for wines in reviews df")
+# bar
+```
+
+```{r}
+# group, order, and filter the data so only the top 15 countries are shown on the chart
+# wines_by_country = wine_reviews %>%
+  # group_by(count(country)) %>%
+  # arrange(country)
+
+# wines_by_country
+```
+
+```{r}
+# scatterplot of price of wines against points
+
+```
+
+```{r}
+# graph of top wineries
+
+```
+
+```{r}
+# graph of top varieties
+
+```
+
+
+```{r}
+# graph of top provinces
+
 ```
