@@ -144,21 +144,93 @@ top_10_provinces_bar
 
 ```{r}
 # scatterplot of wineries by average points
+winery_counts = wine_reviews %>%
+  group_by(winery) %>%
+  summarise(observations = n())
 
+top_50_wineries = winery_counts %>%
+  top_n(50, wt = observations) %>%
+  pull(winery)
+
+top_50_wineries = wine_reviews %>%
+  filter(winery %in% top_50_wineries)
+
+top_50_wineries_points_graph = ggplot(top_50_wineries, aes(x = winery, y = points, color = country)) +
+  stat_summary(fun = "mean", geom = "point", size = 3) +
+  labs(title = "Scatterplot of Points Averaged by Winery (Top 50)",
+       x = "Winery",
+       y = "Average Points") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+top_50_wineries_points_graph
 ```
 
 ```{r}
 # scatterplot of wineries by average price
+winery_counts = wine_reviews %>%
+  group_by(winery) %>%
+  summarise(observations = n())
 
+top_50_wineries = winery_counts %>%
+  top_n(50, wt = observations) %>%
+  pull(winery)
+
+top_50_wineries = wine_reviews %>%
+  filter(winery %in% top_50_wineries)
+
+top_50_wineries_price_graph = ggplot(top_50_wineries, aes(x = winery, y = price, color = country)) +
+  stat_summary(fun = "mean", geom = "point", size = 3) +
+  labs(title = "Scatterplot of Price Averaged by Winery (Top 50)",
+       x = "Winery",
+       y = "Average Price") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+top_50_wineries_price_graph
 ```
 
 ```{r}
 # scatterplot of varieties by average points
+variety_counts = wine_reviews %>%
+  group_by(variety) %>%
+  summarise(observations = n())
 
+top_50_varieties = variety_counts %>%
+  top_n(50, wt = observations) %>%
+  pull(variety)
+
+top_50_varieties = wine_reviews %>%
+  filter(variety %in% top_50_varieties)
+
+top_50_varieties_points_graph = ggplot(top_50_varieties, aes(x = variety, y = points, color = price)) +
+  stat_summary(fun = "mean", geom = "point", size = 3) +
+  labs(title = "Scatterplot of Points Averaged by Variety (Top 50)",
+       x = "Variety",
+       y = "Average Points") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+top_50_varieties_points_graph
 ```
 
 ```{r}
 # scatterplot of varieties by average price
+variety_counts = wine_reviews %>%
+  group_by(variety) %>%
+  summarise(observations = n())
 
+top_50_varieties = variety_counts %>%
+  top_n(50, wt = observations) %>%
+  pull(variety)
+
+top_50_varieties = wine_reviews %>%
+  filter(variety %in% top_50_varieties)
+
+top_50_varieties_price_graph = ggplot(top_50_varieties, aes(x = variety, y = price, color = points)) +
+  stat_summary(fun = "mean", geom = "point", size = 3) +
+  labs(title = "Scatterplot of Price Averaged by Variety (Top 50)",
+       x = "Variety",
+       y = "Average Price") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+top_50_varieties_price_graph
 ```
 
