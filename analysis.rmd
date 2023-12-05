@@ -36,12 +36,12 @@ print(col_names)
 ```
 
 ```{r}
-wine_counts <- wine_reviews %>%
+wine_counts = wine_reviews %>%
   group_by(country) %>%
   summarise(wine_count = n()) %>%
   arrange(desc(wine_count))
 
-top_10_countries <- head(wine_counts, 10)
+top_10_countries = head(wine_counts, 10)
 ```
 
 ```{r}
@@ -72,21 +72,93 @@ top_10_countries_bar
 
 ```{r}
 # scatterplot of price of wines against points
-
+price_points_plot = ggplot(wine_reviews, aes(x = points, y = price)) +
+  geom_point(alpha=0.4, aes(color="darkviolet")) +
+  labs(title = "Scatterplot of Points vs. Price",
+       x = "Points",
+       y = "Price") +
+  geom_smooth()
+price_points_plot
 ```
 
 ```{r}
 # graph of top wineries
+winery_counts = wine_reviews %>%
+  group_by(winery) %>%
+  summarise(winery_count = n()) %>%
+  arrange(desc(winery_count))
 
+top_10_wineries = head(winery_counts, 10)
+
+top_10_wineries_bar = ggplot(top_10_wineries, aes(x = reorder(winery, -winery_count), y = winery_count)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = winery_count), vjust = -0.5, size = 3) +
+  ggtitle("Top 10 Wineries by Number of Wines") +
+  xlab("Winery") +
+  ylab("Number of Wines") + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+top_10_wineries_bar
 ```
 
 ```{r}
 # graph of top varieties
+variety_counts = wine_reviews %>%
+  group_by(variety) %>%
+  summarise(variety_count = n()) %>%
+  arrange(desc(variety_count))
 
+top_10_varieties = head(variety_counts, 10)
+
+top_10_varieties_bar = ggplot(top_10_varieties, aes(x = reorder(variety, -variety_count), y = variety_count)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = variety_count), vjust = -0.5, size = 3) +
+  ggtitle("Top 10 Wine Varieties from the Data") +
+  xlab("Variety") +
+  ylab("Number of Wines") + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+top_10_varieties_bar
 ```
 
 
 ```{r}
 # graph of top provinces
+province_counts = wine_reviews %>%
+  group_by(province) %>%
+  summarise(province_count = n()) %>%
+  arrange(desc(province_count))
+
+top_10_provinces = head(province_counts, 10)
+
+top_10_provinces_bar = ggplot(top_10_provinces, aes(x = reorder(province, -province_count), y = province_count)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = province_count), vjust = -0.5, size = 3) +
+  ggtitle("Top 10 Provinces by Number of Wines") +
+  xlab("Province") +
+  ylab("Number of Wines") + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+top_10_provinces_bar
+```
+
+```{r}
+# scatterplot of wineries by average points
 
 ```
+
+```{r}
+# scatterplot of wineries by average price
+
+```
+
+```{r}
+# scatterplot of varieties by average points
+
+```
+
+```{r}
+# scatterplot of varieties by average price
+
+```
+
