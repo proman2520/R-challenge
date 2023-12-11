@@ -55,6 +55,8 @@ countries_bar = ggplot(wine_counts, aes(x = reorder(country, -wine_count), y = w
   ylab("Number of Wines") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 
+ggsave("Visualizations/num_wines_by_country.png", countries_bar, width = 8, height = 6, units = "in", dpi = 300)
+
 countries_bar
 ```
 
@@ -68,6 +70,8 @@ top_10_countries_bar = ggplot(top_10_countries, aes(x = reorder(country, -wine_c
   ylab("Number of Wines") + 
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
+ggsave("Visualizations/num_wines_by_country_top10.png", top_10_countries_bar, width = 8, height = 6, units = "in", dpi = 300)
+
 top_10_countries_bar
 ```
 
@@ -79,6 +83,9 @@ price_points_plot = ggplot(wine_reviews, aes(x = points, y = price)) +
        x = "Points",
        y = "Price") +
   geom_smooth()
+
+ggsave("Visualizations/points_vs_price_scatter.png", price_points_plot, width = 8, height = 6, units = "in", dpi = 300)
+
 price_points_plot
 ```
 
@@ -98,6 +105,8 @@ top_10_wineries_bar = ggplot(top_10_wineries, aes(x = reorder(winery, -winery_co
   xlab("Winery") +
   ylab("Number of Wines") + 
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+ggsave("Visualizations/num_wines_by_winery_top10.png", top_10_wineries_bar, width = 8, height = 6, units = "in", dpi = 300)
 
 top_10_wineries_bar
 ```
@@ -119,6 +128,8 @@ top_10_varieties_bar = ggplot(top_10_varieties, aes(x = reorder(variety, -variet
   ylab("Number of Wines") + 
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
+ggsave("Visualizations/num_wines_by_variety_top10.png", top_10_varieties_bar, width = 8, height = 6, units = "in", dpi = 300)
+
 top_10_varieties_bar
 ```
 
@@ -139,6 +150,8 @@ top_10_provinces_bar = ggplot(top_10_provinces, aes(x = reorder(province, -provi
   xlab("Province") +
   ylab("Number of Wines") + 
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+ggsave("Visualizations/num_wines_by_province_top10.png", top_10_provinces_bar, width = 8, height = 6, units = "in", dpi = 300)
 
 top_10_provinces_bar
 ```
@@ -163,6 +176,8 @@ top_50_wineries_points_graph = ggplot(top_50_wineries, aes(x = winery, y = point
        y = "Average Points") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
+ggsave("Visualizations/avg_points_by_top50_winery.png", top_50_wineries_points_graph, width = 8, height = 6, units = "in", dpi = 300)
+
 top_50_wineries_points_graph
 ```
 
@@ -185,6 +200,8 @@ top_50_wineries_price_graph = ggplot(top_50_wineries, aes(x = winery, y = price,
        x = "Winery",
        y = "Average Price") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggsave("Visualizations/avg_price_by_top50_winery.png", top_50_wineries_price_graph, width = 8, height = 6, units = "in", dpi = 300)
 
 top_50_wineries_price_graph
 ```
@@ -209,6 +226,8 @@ top_50_varieties_points_graph = ggplot(top_50_varieties, aes(x = variety, y = po
        y = "Average Points") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
+ggsave("Visualizations/avg_points_by_top50_variety.png", top_50_varieties_points_graph, width = 8, height = 6, units = "in", dpi = 300)
+
 top_50_varieties_points_graph
 ```
 
@@ -231,6 +250,8 @@ top_50_varieties_price_graph = ggplot(top_50_varieties, aes(x = variety, y = pri
        x = "Variety",
        y = "Average Price") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggsave("Visualizations/avg_price_by_top50_variety.png", top_50_varieties_price_graph, width = 8, height = 6, units = "in", dpi = 300)
 
 top_50_varieties_price_graph
 ```
@@ -258,6 +279,9 @@ points_by_price_country <- ggplot(country_data, aes(x = avg_price, y = avg_point
   guides(color = FALSE) +
   theme(plot.margin = margin(1, 0.1, 1, 1, "cm"))
 
+ggsave("Visualizations/groupby_country_points_vs_price.png", points_by_price_country, width = 8, height = 6, units = "in", dpi = 300)
+
+country_data
 points_by_price_country
 ```
 
