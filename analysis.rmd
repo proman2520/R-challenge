@@ -17,6 +17,7 @@ output: "html_document"
 library(readr)
 library(dplyr)
 library(ggplot2)
+library(ggrepel)
 ```
 
 ```{r message=FALSE, warning=FALSE}
@@ -232,5 +233,31 @@ top_50_varieties_price_graph = ggplot(top_50_varieties, aes(x = variety, y = pri
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 top_50_varieties_price_graph
+```
+
+
+```{r}
+# Points by price grouped by country
+country_data <- wine_reviews %>%
+  group_by(country) %>%
+  summarise(avg_price = mean(price, na.rm = TRUE),
+            avg_points = mean(points, na.rm = TRUE))
+
+points_by_price_country <- ggplot(country_data, aes(x = avg_price, y = avg_points, color = country, label = country)) +
+  geom_point() +
+  geom_text_repel(
+    box.padding = 0.5,
+    point.padding = 0.1,
+    force = 5,
+    max.overlaps = Inf,
+    size = 2
+  ) +
+  geom_smooth(aes(group = 1), method = "lm", se = FALSE, alpha = 0.1) +
+  labs(title = "Average Wine Reviews by Country", x = "Average Price", y = "Average Points") +
+  theme_minimal() +
+  guides(color = FALSE) +
+  theme(plot.margin = margin(1, 0.1, 1, 1, "cm"))
+
+points_by_price_country
 ```
 
